@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+</head>
+<body>
+
+<section>
+    <h1>Welcome to setting to change your settings !</h1>
+
+    <!-- javascript for changing the sidebar menu link color when clicked writting funciton on common Id .item
+        when document is ready then first remove active class  and then add the active class in the current page -->
+    <script>
+        $(document).ready(()=>{
+            $(".item").removeClass("active");
+            $("#setting-link").addClass("active");
+        });
+    </script>
+</section>
+
+</body>
+</html>

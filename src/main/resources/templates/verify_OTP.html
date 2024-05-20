@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+</head>
+<body>
+<section>
+    <div class="my-card mt-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <div  class="alert alert-success">
+                            OTP is sent to your Email..
+                        </div>
+                        <form novalidate action="#" th:action="@{/sendOTP}" method="post">
+                            <div class="form-group">
+
+                                <input type="text" id="otp" class="form-control form-control-lg"
+                                       name="otp" placeholder="Enter Your OTP Here!" required/>
+
+                            </div>
+                            <button class="btn bg-primary text-white" type="submit">Verify</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

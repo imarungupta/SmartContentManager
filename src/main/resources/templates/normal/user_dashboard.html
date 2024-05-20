@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="card">
+            <div class="card-body mt-0">
+                <div class="container text-center">
+                    <img src="" style="height: 200px; width: 200px" class="my_profile_picture" th:src="@{/image/home.png}"  alt="Home"/>
+                </div>
+                <div class="container text-center">
+                    <img src="" style="height: 250px; width: 250px" class="" th:src="@{/image/TrustCare.jpg}"  alt="Home"/>
+                </div>
+                <div class="container text-center">
+                    <span>
+                        <h1><p>The place where your health matters most</p></h1>
+                    </span>
+                    <span>
+                        <p>Our pharmacy is your trusted source for quality medications. We have a knowledgeable staff. Your health is our top priority. We're here to serve you</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- javascript for changing the sidebar menu link color when clicked writting funciton on common Id .item
+    when document is ready then first remove active class  and then add the active class in the current page -->
+    <script>
+        $(document).ready(()=>{
+            $(".item").removeClass("active");
+            $("#home-link").addClass("active");
+        });
+    </script>
+</section>
+
+</body>
+</html>

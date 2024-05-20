@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+</head>
+<body>
+
+<section class="banner d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h1 class="font-weight-bold">TRUST CARE PHARMACY</h1>
+        <p>Please Start Collecting your contacts in a very smarter way.
+            We provide you smarter way of handling your contacts
+        </p>
+        <button class="btn bg-primary btn-lg text-white">Get Start</button>
+    </div>
+</section>
+<!-- javascript for changing the sidebar menu link color when clicked writting funciton on common Id .item
+        when document is ready then first remove active class  and then add the active class in the current page -->
+<script>
+    $(document).ready(()=>{
+        $(".item").removeClass("active");
+        $("#home-link").addClass("active");
+    });
+</script>
+</body>
+</html>

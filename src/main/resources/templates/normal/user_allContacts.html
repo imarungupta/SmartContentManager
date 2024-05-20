@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3">
+        <div class="card-body">
+            <h1 class="text-center">Your Contacts</h1>
+            <!-- Search Box functionality  Step 1: Jquery will be written based on id : search-input - -->
+            <div class="search-container mt3">
+                    <input onkeyup="search()" type="text" name="" id="search-input" class="form-control" placeholder="Search your contacts">
+                <!-- div tag to show search result on keyUp  and will hide using CSS  so Step -2 will be CSS  -->
+                <div class="search-result">
+                    <h1>result</h1>
+                </div>
+            </div>
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr th:each="c : ${userContacts}">
+                    <th scope="row" th:text="${'SCM-EMP-'+c.cId}">1</th>
+                    <td>
+                        <img class="my_profile_picture" src="" th:src="@{'/image/'+${c.image}}" alt="">
+                        <span th:text="${c.name}"></span></td>
+                    <td >
+                        <a href="#" th:href="@{'/user/'+${c.cId}+'/contact'}">
+                            <span th:text="${c.email}"></span>
+                        </a>
+                       </td>
+                    <td th:text="${c.phone}">@mdo</td>
+                    <td >
+                       <!-- <a  th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">Delete</a>-->
+                        <!-- th:href="@{'/user/delete/'+${c.cId}}" this method is being called in the javaScript
+                        deleteContact function in base.html page that is why in delete we are calling function onclick and passing the cid -->
+
+                        <div class="container">
+                            <form th:action="@{'/user/updateContact/'+${c.cId}}" method="post">
+                                <a  href="#" th:onclick="| deleteContact(${c.cId})|" class="btn btn-danger btn-sm">Delete</a>
+                                <button class="btn bg-primary btn-sm text-white" type="submit">Update</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li th:if="${currentPage!=0}" class="page-item"><a class="page-link" href="#" th:href="@{'/user/showContacts/'+${currentPage-1}}" >Previous</a></li>
+
+                    <li th:classappend="${currentPage==i-1 ? 'active':''}" class="page-item" th:each="i : ${#numbers.sequence(1,totalPages)}">
+                        <a class="page-link" href="#" th:href="@{'/user/showContacts/'+${i-1}}"><span th:text="${i}"></span></a></li>
+
+                    <li th:if="${currentPage+1!=totalPages}" class="page-item"><a class="page-link" href="#" th:href="@{'/user/showContacts/'+${currentPage+1}}">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- the above line will be executed when the contact will be false i.e. when it will not come from the model-attribute -->
+    <script>
+        $(document).ready(()=>{
+            $('.item').removeClass('active');
+            $("#view-contact-link").addClass("active");
+        });
+    </script>
+</section>
+
+</body>
+</html>

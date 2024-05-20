@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+</head>
+<body>
+<section>
+    <h1>Contact Detail</h1>
+    <div class="card mr-3 mt-3" th:if="${contact}"> <!--when contact comes from attribute then only will show the page for the particular user -->
+        <div class="card-body" >
+            <div class="container text-center">
+                <img style="height: 200px; width: 200px"  class="my_profile_picture" src="" th:src="@{'/image/'+${contact.image}}" alt="profile photo">
+                <h3 class="mt3"><span th:text="${contact.name}"></span><span th:text="'-'+${contact.secondName}"></span></h3>
+                <table class="table text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">SCM-EMP-<span th:text="${contact.cId}"></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td><span th:text="${contact.email}"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Phone</th>
+                        <td><span th:text="${contact.phone}"></span></td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Work</th>
+                        <td><span th:text="${contact.work}"></span></td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Description</th>
+                        <td><span th:text="${contact.description}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="container text-center">
+                    <form th:action="@{'/user/updateContact/'+${contact.cId}}" method="post">
+                        <a th:href="@{'/user/delete/'+${contact.cId}}" class="btn bg-danger text-white" type="reset"> Delete </a>
+                        <button class="btn bg-primary text-white" type="submit">Update</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 th:unless="${contact}" class="bg-danger text-white text-uppercase">You do not have permission to see the contact detail!!</h1>
+    <!-- the above line will be executed when the contact will be false i.e. when it will not come from the model-attribute -->
+</section>
+
+</body>
+</html>
