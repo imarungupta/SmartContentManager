@@ -12,18 +12,24 @@
         <div class="card">
             <div class="card-body mt-0">
                 <div class="container text-center">
-                    <img src="" style="height: 200px; width: 200px" class="my_profile_picture" th:src="@{/image/home.png}"  alt="Home"/>
+                    <img src="" style="height: 100px; width: 100px" class="my_profile_picture" th:src="@{/image/home.png}"  alt="Home"/>
                 </div>
                 <div class="container text-center">
-                    <img src="" style="height: 250px; width: 250px" class="" th:src="@{/image/TrustCare.jpg}"  alt="Home"/>
+                    <img src="" style="height: 150px; width: 150px" class="" th:src="@{/image/TrustCare.jpg}"  alt="Home"/>
                 </div>
                 <div class="container text-center">
                     <span>
-                        <h1><p>The place where your health matters most</p></h1>
+                        <h5><p>The place where your health matters most</p></h5>
                     </span>
                     <span>
-                        <p>Our pharmacy is your trusted source for quality medications. We have a knowledgeable staff. Your health is our top priority. We're here to serve you</p>
+                       <h5><p>!! Your health is our top priority. We're here to serve you !!</p></h5>
                     </span>
+                </div>
+                <hr />
+                <h3 class="my-2">Donate Us</h3>
+                <input id="payment-input" type="text" name="" class="form-control my-2" placeholder="Enter amount here!"/>
+                <div class="container text-center">
+                    <button class="btn btn-success btn-block bg-primary" onclick="paymentStart()">Pay</button>
                 </div>
             </div>
         </div>

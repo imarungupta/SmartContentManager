@@ -7,6 +7,7 @@ import com.smart.dao.UserRepository;
 import com.smart.entities.Contact;
 import com.smart.entities.User;
 import jakarta.servlet.http.HttpSession;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import com.razorpay.*;
 
 
 @Controller
@@ -299,5 +302,38 @@ so to solve this issue we should use PostMapping */
     @GetMapping("/settings")
     public String settings(){
         return "normal/settings";
+    }
+
+    // Step2- Razorpay Gateway ajax call with amount and order_request
+    // Now to create order, we need to send request to server
+    // We will get request from ajax to send request to server
+    @PostMapping("/createPaymentOrder")
+    @ResponseBody
+    public String createOrder(@RequestBody Map<String, Object > data) throws RazorpayException {
+
+        System.out.println("Backend createOrder function executed!! Now let's try to see the request coming from ajax");
+        System.out.println("data: "+data);
+        //data: {amount=123, info=order_request}
+        // Let's extract the amount , since this is map so will extract using get(key)
+
+        int amt = Integer.parseInt(data.get("amount").toString());
+        System.out.println("amount from ajax: "+amt);
+
+        String key= "rzp_test_haDRsJIQo9vFPJ";
+        String Secret= "owKJJes2fwE6YD6DToishFuH";
+
+        RazorpayClient razorpayClient = new RazorpayClient(key, Secret);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("amount",amt);
+        jsonObject.put("currency","INR");
+        jsonObject.put("receipt","txn_235425");
+
+        // Create Order to send as request to Razorpay server
+        Order order = razorpayClient.orders.create(jsonObject);
+        System.out.println("order Obj: "+order);
+        // Now we need to send or return this order id to client, and we can save this order into DB as well
+
+        return order.toString();
     }
 }

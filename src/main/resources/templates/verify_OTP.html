@@ -16,8 +16,15 @@
                         <div  class="alert alert-success">
                             OTP is sent to your Email..
                         </div>
-
-                        <form novalidate action="#" th:action="@{/sendOTP}" method="post">
+                        <!-- Message box for adding contact: This can be used as reusable component any where -->
+                        <div th:if="${session.message}"  class="container text-center">
+                            <div class="alert alert-danger my-2" role="alert">
+                                <span th:text="${session.message}"></span>
+                            </div>
+                            <!-- To remove the message box once it gets rendered : The below code is not working , need to check-->
+                            <!--<th:block th:text="${session.remove('message')}"></th:block>-->
+                        </div>
+                        <form novalidate action="#" th:action="@{/verifyOTP}" method="post">
                             <div class="form-group">
 
                                 <input type="text" id="otp" class="form-control form-control-lg"
